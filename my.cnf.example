@@ -1,0 +1,57 @@
+[client]
+port = 3306
+socket = /data/data/mysql_data_3306/mysql_3306.sock
+default-character-set = utf8mb4
+
+[mysqld]
+port = 3306
+socket = /data/data/mysql_data_3306/mysql_3306.sock
+user = mysql
+server-id = 1
+bind-address = 0.0.0.0
+basedir = /data/software/mysql
+datadir = /data/data/mysql_data_3306
+pid-file = /data/data/mysql_data_3306/mysql_3306.pid
+
+sql_mode = STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+init-connect = 'SET NAMES utf8mb4'
+character-set-server = utf8mb4
+skip-name-resolve = ON
+#skip-networking = ON
+max_connections = 2048
+max_connect_errors = 6000
+open_files_limit = 65535
+lower_case_table_names = 1
+query_cache_type = 0
+query_cache_size = 0
+
+##Replication
+log_bin = /data/data/bin_log/bin_log_3306
+binlog_format = row
+binlog_cache_size = 64M
+log-slave-updates = ON
+skip_slave_start = ON
+expire_logs_days = 30
+
+log_error = /data/data/mysql_log/error_log_3306.log
+slow_query_log = ON
+long_query_time = 1
+slow_query_log_file = /data/data/mysql_log/slow_log_3306.log
+explicit_defaults_for_timestamp = ON
+log_timestamps  = SYSTEM
+
+##GTID
+gtid_mode=on
+#gtid_mode = on_permissive
+enforce_gtid_consistency=on
+
+###INNODB
+innodb_buffer_pool_size = 8G
+innodb_buffer_pool_instances = 8
+innodb_log_file_size = 512M
+innodb_log_buffer_size = 8M
+innodb_file_per_table = ON
+innodb_stats_on_metadata = OFF
+innodb_flush_log_at_trx_commit = 2
+innodb_flush_method = O_DIRECT
+innodb_autoinc_lock_mode =2
